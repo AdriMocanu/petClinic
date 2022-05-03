@@ -1,30 +1,21 @@
 package com.endava.petclinic.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
-@JsonIgnoreProperties (ignoreUnknown = true)
 @Data
 @NoArgsConstructor
-@RequiredArgsConstructor
-public class Owner {
+public class Visit {
 
-    @EqualsAndHashCode.Exclude
     private Long id;
-    @NonNull
-    private String firstName;
-    @NonNull
-    private String lastName;
-    @NonNull
-    private String address;
-    @NonNull
-    private String city;
-    @NonNull
-    private String telephone;
+    private String date;
+    private String description;
+    private Pet pet;
+
 
     @Override
     public String toString() {
@@ -40,12 +31,12 @@ public class Owner {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Owner owner = (Owner) o;
-        return firstName.equals(owner.firstName) && lastName.equals(owner.lastName) && address.equals(owner.address) && city.equals(owner.city) && telephone.equals(owner.telephone);
+        Visit that = (Visit) o;
+        return Objects.equals(date, that.date) && Objects.equals(description, that.description) && Objects.equals(pet, that.pet);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, address, city, telephone);
+        return Objects.hash(date, description, pet);
     }
 }
